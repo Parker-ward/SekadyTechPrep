@@ -7,6 +7,17 @@ export class TripsController extends BaseController {
     this.router
       .post('', this.createTrip)
       .get('', this.getAllTrips)
+      .get('/:tripId', this.getTripById)
+  }
+  async getTripById(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const trip = await tripsService.getTripById(tripId)
+      return res.send(trip)
+    } catch (error) {
+      next(error)
+
+    }
   }
   async getAllTrips(req, res, next) {
     try {
