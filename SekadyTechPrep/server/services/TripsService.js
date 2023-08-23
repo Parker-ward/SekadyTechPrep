@@ -1,8 +1,9 @@
 import { dbContext } from "../db/DbContext.js"
 
 class TripsService {
-  getAllTrips() {
-    throw new Error("Method not implemented.")
+  async getAllTrips() {
+    const trips = await dbContext.Trips.find()
+    return trips
   }
   async createTrip(tripData) {
     const trip = await dbContext.Trips.create(tripData)
