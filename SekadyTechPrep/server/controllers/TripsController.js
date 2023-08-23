@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { tripsService } from "../services/TripsService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -8,6 +9,8 @@ export class TripsController extends BaseController {
       .post('', this.createTrip)
       .get('', this.getAllTrips)
       .get('/:tripId', this.getTripById)
+      .use(Auth0Provider.getAuthorizedUserInfo)
+
   }
   async getTripById(req, res, next) {
     try {
