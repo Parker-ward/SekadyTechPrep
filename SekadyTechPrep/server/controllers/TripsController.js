@@ -6,10 +6,11 @@ export class TripsController extends BaseController {
   constructor() {
     super('/api/trips')
     this.router
-      .post('', this.createTrip)
       .get('', this.getAllTrips)
       .get('/:tripId', this.getTripById)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .post('', this.createTrip)
+      .delete('/:tripId', this.cancelTrip)
 
   }
   async getTripById(req, res, next) {
@@ -41,9 +42,7 @@ export class TripsController extends BaseController {
       next(error)
     }
   }
-
   async cancelTrip(req, res, next) {
-
     try {
       const tripId = req.params.tripId
       const requestorId = req.userInfo.id
