@@ -1,7 +1,18 @@
 import { dbContext } from "../db/DbContext.js"
-import { BadRequest } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripsService {
+  async cancelTrip(tripId, requestorId) {
+    const trip = await this.getTripById(tripId)
+    if (trip.creatorId.toString() != requestorId) {
+      throw new Forbidden('You are NOT allowed to do that buckaroo')
+    }
+    if (trip.isCanceled == false) {
+      trip.isCanceled = true
+    }
+    await trip.save()
+    return trip
+  }
   async getAllTrips() {
     const trips = await dbContext.Trips.find()
     return trips

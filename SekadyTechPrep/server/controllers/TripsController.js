@@ -41,4 +41,16 @@ export class TripsController extends BaseController {
       next(error)
     }
   }
+
+  async cancelTrip(req, res, next) {
+
+    try {
+      const tripId = req.params.tripId
+      const requestorId = req.userInfo.id
+      const trip = await tripsService.cancelTrip(tripId, requestorId)
+      return res.send(trip)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
