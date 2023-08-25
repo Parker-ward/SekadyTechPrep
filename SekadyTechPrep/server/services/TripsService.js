@@ -2,6 +2,21 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TripsService {
+  async editTrip(tripId, tripData, requestorId) {
+    const foundTrip = await this.getTripById(tripId)
+    if (foundTrip.isCanceled) {
+      throw new BadRequest('Trip has be canceled')
+    }
+    if (foundTrip.creatorId.toString() != requestorId) {
+      throw new Forbidden('You can not edit this trip')
+    }
+    foundTrip.name = tripData.name || tripData.name
+    foundTrip.location = tripData.location || foundTrip.location
+    foundTrip.startDate = tripData.startDate || foundTrip.startDate
+
+    await foundTrip.save()
+    return foundTrip
+  }
   async cancelTrip(tripId, requestorId) {
     const trip = await this.getTripById(tripId)
     if (trip.creatorId.toString() != requestorId) {

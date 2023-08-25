@@ -10,8 +10,21 @@ export class TripsController extends BaseController {
       .get('/:tripId', this.getTripById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createTrip)
+      .put('/:tripId', this.editTrip)
       .delete('/:tripId', this.cancelTrip)
 
+  }
+  async editTrip(req, res, next) {
+    try {
+      const tripId = req.params.tripId
+      const tripData = req.body
+      const requestorId = req.userInfo.id
+      const editTrip = await tripsService.editTrip(tripId, tripData, requestorId)
+      return res.send(editTrip)
+    } catch (error) {
+      next(error)
+
+    }
   }
   async getTripById(req, res, next) {
     try {
