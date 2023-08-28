@@ -38,9 +38,16 @@
 
 
 <script>
+import { ref } from 'vue';
+
 export default {
   setup() {
-    return {}
+
+    const editable = ref({})
+    return {
+      editable,
+
+    }
   }
 }
 </script>

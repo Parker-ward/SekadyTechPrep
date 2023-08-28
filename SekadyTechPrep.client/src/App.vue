@@ -8,7 +8,7 @@
   <footer class="bg-dark text-light">
     Made by Parker Ward
   </footer>
-  <div class="modal" tabindex="-1" id="createForm">
+  <div class="modal" tabindex="-1" id="createTrip">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

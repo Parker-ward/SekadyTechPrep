@@ -4,7 +4,7 @@
   </div>
   <div class="d-flex justify-content-end my-3 p-2 fixed-bottom">
     <button class="btn btn-success col-md-1" title="New trip" @click="createTrip" data-bs-toggle="modal"
-      data-bs-target="#exampleModalLable"><i class="mdi mdi-plus"></i>
+      data-bs-target="#createTrip"><i class="mdi mdi-plus"></i>
     </button>
   </div>
 </template>

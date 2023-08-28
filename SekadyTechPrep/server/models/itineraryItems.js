@@ -8,5 +8,6 @@ export const itineraryItemsSchema = new Schema({
   date: { type: String, required: true, },
   price: { type: Number, required: true, },
   creatorId: { type: String, required: true },
+  tripId: { type: Schema.Types.ObjectId, ref: 'Trip', required: true },
   tripType: { type: String, required: true, minLength: 3, maxLength: 500, enum: ['plane', 'car', 'beach', 'themepark', 'hotel', 'condo', 'house', 'bus', 'car'] }
 })
