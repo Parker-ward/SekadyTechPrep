@@ -48,7 +48,7 @@ export class TripsController extends BaseController {
   async createTrip(req, res, next) {
     try {
       const tripData = req.body
-      tripData.creatorId = req.userInfo._id
+      tripData.creatorId = req.userInfo.id
       const trip = await tripsService.createTrip(tripData)
       return res.send(trip)
     } catch (error) {
