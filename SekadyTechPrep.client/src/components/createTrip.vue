@@ -30,7 +30,7 @@
     </div>
     <div>
       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-        {{ editable.id ? 'Save Changes' : 'Create Event' }}
+        {{ editable.id ? 'Save Changes' : 'Create Trip' }}
       </button>
     </div>
   </form>
@@ -39,14 +39,26 @@
 
 <script>
 import { ref } from 'vue';
+import Pop from '../utils/Pop.js';
+import { tripsService } from '../services/TripsService.js';
 
 export default {
+  props: {
+    trip: { type: Object, required: true }
+  },
   setup() {
 
     const editable = ref({})
     return {
       editable,
-
+      async handleSubmit() {
+        try {
+          const trip = await tripsService.createTrip(editable.value)
+          editable.value = {}
+        } catch (error) {
+          Pop.error(error, "[Submit Trip]")
+        }
+      }
     }
   }
 }

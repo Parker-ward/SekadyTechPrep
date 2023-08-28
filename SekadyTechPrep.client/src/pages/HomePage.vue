@@ -10,8 +10,24 @@
 </template>
 
 <script>
+import Pop from '../utils/Pop.js';
+import { tripsService } from '../services/tripsService.js'
+import { onMounted } from 'vue';
+
 export default {
   setup() {
+
+    async function getAllTrips() {
+      try {
+        await tripsService.getAllTrips()
+      } catch (error) {
+        Pop.error('error', "get all my trips")
+      }
+    }
+
+    onMounted(() => {
+      getAllTrips()
+    })
     return {}
   }
 }
@@ -38,3 +54,4 @@ export default {
   }
 }
 </style>
+../services/TripsService.js
