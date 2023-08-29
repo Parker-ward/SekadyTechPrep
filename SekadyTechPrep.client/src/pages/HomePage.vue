@@ -2,6 +2,14 @@
   <div class="text-center">
     <h1>Hello Home Page</h1>
   </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div v-for="t in trips" :key="t.id" class="col-md-3">
+        <TripCard :trip="t" />
+      </div>
+    </div>
+  </div>
+
   <div class="d-flex justify-content-end my-3 p-2 fixed-bottom">
     <button class="btn btn-success col-md-1" title="New trip" @click="createTrip" data-bs-toggle="modal"
       data-bs-target="#createTrip"><i class="mdi mdi-plus"></i>
@@ -11,25 +19,31 @@
 
 <script>
 import Pop from '../utils/Pop.js';
-import { tripsService } from '../services/tripsService.js'
-import { onMounted } from 'vue';
+import { tripsService } from '../services/TripsService.js';
+import { computed, onMounted } from 'vue';
+import TripCard from '../components/tripCard.vue';
+import { AppState } from '../AppState.js';
 
 export default {
   setup() {
-
     async function getAllTrips() {
       try {
-        await tripsService.getAllTrips()
-      } catch (error) {
-        Pop.error('error', "get all my trips")
+        await tripsService.getAllTrips();
+      }
+      catch (error) {
+        Pop.error('error', "get all my trips");
       }
     }
-
     onMounted(() => {
-      getAllTrips()
-    })
-    return {}
-  }
+      getAllTrips();
+    });
+    return {
+      trips: computed(() => {
+        return AppState.trips
+      })
+    };
+  },
+  components: { TripCard }
 }
 </script>
 
