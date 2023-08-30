@@ -16,6 +16,13 @@ class TripsService {
     logger.log("getting all trips", res.data)
     AppState.trips = trips
   }
+
+  async getTripById(tripId) {
+    AppState.trip = null
+    const res = await api.get('api/trips/' + tripId)
+    logger.log('[trip by id]', res.data)
+    AppState.trip = (res.data)
+  }
 }
 
 export const tripsService = new TripsService()

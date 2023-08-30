@@ -43,9 +43,9 @@ import Pop from '../utils/Pop.js';
 import { tripsService } from '../services/TripsService.js';
 
 export default {
-  props: {
-    trip: { type: Object, required: true }
-  },
+  // props: {
+  //   trip: { type: Object, required: true }
+  // },
   setup() {
 
     const editable = ref({})
