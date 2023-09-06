@@ -15,8 +15,12 @@
       <p>
         {{ trip.startDate }}
       </p>
-      <div class="btn btn-danger">Delete</div>
-
+      <div class="btn btn-danger mb-2">Delete</div>
+      <div>
+        <img class="rounded" :src="trip.creator.picture" alt="">
+        <p>{{ trip.creator.name }}</p>
+        <p>{{ trip.creator.email }}</p>
+      </div>
     </div>
   </div>
 </template>
