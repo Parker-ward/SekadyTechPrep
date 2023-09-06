@@ -15,6 +15,7 @@
       <p>
         {{ trip.startDate }}
       </p>
+      <div class="btn btn-danger">Delete</div>
 
     </div>
   </div>
