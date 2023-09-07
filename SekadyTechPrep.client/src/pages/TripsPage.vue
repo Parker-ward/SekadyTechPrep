@@ -15,7 +15,7 @@
       <p>
         {{ trip.startDate }}
       </p>
-      <div class="btn btn-danger mb-2">Delete</div>
+      <div @click="deleteTrip(trip.id)" class="btn btn-danger mb-2">Delete</div>
       <div>
         <img class="rounded" :src="trip.creator.picture" alt="">
         <p>{{ trip.creator.name }}</p>
@@ -53,9 +53,19 @@ export default {
     }
 
 
+
     return {
-      trip: computed(() => AppState.trip)
+      trip: computed(() => AppState.trip),
+
+      async deleteTrip(tripId) {
+        try {
+          await tripsService.deleteTrip(tripId)
+        } catch (error) {
+          Pop.error(error, "delete trip")
+        }
+      }
     }
+
   }
 }
 </script>

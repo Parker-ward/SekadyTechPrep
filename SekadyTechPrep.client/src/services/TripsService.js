@@ -23,6 +23,15 @@ class TripsService {
     logger.log('[trip by id]', res.data)
     AppState.trip = (res.data)
   }
+
+  async deleteTrip(tripId) {
+    const res = await api.delete('api/trips/' + tripId)
+    logger.log('[delete trip]', res.data)
+    let i = AppState.trips.findIndex(t => t.id == tripId)
+    if (i != -1) {
+      AppState.trips.splice(i, 1, res.data)
+    }
+  }
 }
 
 export const tripsService = new TripsService()

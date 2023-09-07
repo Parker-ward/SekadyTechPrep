@@ -1,7 +1,7 @@
 <template>
   <router-link class="selectable" :to="{ name: 'Trips', params: { 'tripId': trip.id } }">
     <div class="TripCard card">
-      <img :src="trip.img" alt="">
+      <img class="rounded" :src="trip.img" alt="">
     </div>
   </router-link>
   <div class="card-body text-center">
